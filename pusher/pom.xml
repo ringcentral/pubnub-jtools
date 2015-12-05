@@ -4,63 +4,126 @@
 
     <modelVersion>4.0.0</modelVersion>
 
-   <parent>
-        <groupId>com.ringcentral.pubnub-jtools</groupId>
-        <artifactId>pubnub-jtools</artifactId>
-        <version>1.0.0</version>
-    </parent>
-
+    <groupId>com.ringcentral.pubnub-jtools</groupId>
     <artifactId>pusher</artifactId>
-
+    <version>1.0.0</version>
     <packaging>jar</packaging>
     <description>Pubnub publishing library for highload java servers</description>
-    
+
+    <properties>
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <publisherKey>demo</publisherKey>
+        <subscriberKey>demo</subscriberKey>
+        <secretKey>demo</secretKey>
+    </properties>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <configuration>
+                    <systemProperties>
+                        <property>
+                            <name>publisherKey</name>
+                            <value>${publisherKey}</value>
+                        </property>
+                        <property>
+                            <name>subscriberKey</name>
+                            <value>${subscriberKey}</value>
+                        </property>
+                        <property>
+                            <name>secretKey</name>
+                            <value>${secretKey}</value>
+                        </property>
+                    </systemProperties>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
+    <profiles>
+        <profile>
+            <id>bintray</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <artifactId>maven-source-plugin</artifactId>
+                        <executions>
+                            <execution>
+                                <id>attach-sources</id>
+                                <goals>
+                                    <goal>jar</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+                    <plugin>
+                        <artifactId>maven-javadoc-plugin</artifactId>
+                        <executions>
+                            <execution>
+                                <id>attach-javadocs</id>
+                                <goals>
+                                    <goal>jar</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
+
     <dependencies>
         <dependency>
             <groupId>org.bouncycastle</groupId>
             <artifactId>bcprov-jdk16</artifactId>
+            <version>1.46</version>
             <scope>provided</scope>
         </dependency>
+        <!--<dependency>-->
+            <!--<groupId>org.apache.httpcomponents</groupId>-->
+            <!--<artifactId>httpcore</artifactId>-->
+            <!--<version>4.1.1</version>-->
+            <!--<scope>provided</scope>-->
+        <!--</dependency>-->
         <dependency>
             <groupId>org.apache.httpcomponents</groupId>
             <artifactId>httpclient</artifactId>
-            <scope>provided</scope>
+            <version>4.4.1</version>
         </dependency>
         <dependency>
             <groupId>org.apache.httpcomponents</groupId>
             <artifactId>httpasyncclient</artifactId>
-            <scope>provided</scope>
+            <version>4.1.1</version>
         </dependency>
+
 
         <!-- Test dependencies-->
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-api</artifactId>
+            <version>1.7.5</version>
             <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>log4j</groupId>
             <artifactId>log4j</artifactId>
+            <version>1.2.17</version>
             <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>com.pubnub</groupId>
             <artifactId>pubnub</artifactId>
+            <version>3.7.5</version>
             <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>org.json</groupId>
             <artifactId>json</artifactId>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.hamcrest</groupId>
-            <artifactId>hamcrest-all</artifactId>
+            <version>20090211</version>
             <scope>test</scope>
         </dependency>
         <dependency>

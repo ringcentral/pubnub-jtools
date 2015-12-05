@@ -30,7 +30,7 @@ In opposite, Pubnub JTools provides true NIO implemented across [Apache Async Ht
 * You free to configure way to send HTTP requests:
   * It is possible to configure synchronous sending via implementation of [Transport](https://github.com/vladimir-bukhtoyarov/pubnub-jtools/blob/master/pusher/src/main/java/com/github/pubnubjtools/pusher/transport/Transport.java) interface. 
   * It is possible to configure asynchronous sending via implementation of [AsyncTransport](https://github.com/vladimir-bukhtoyarov/pubnub-jtools/blob/master/pusher/src/main/java/com/github/pubnubjtools/pusher/transport/AsyncTransport.java) interface.
-* Java 8, yeh baby, lets use CompletableFeature instead of fucking callbacks.
+* Java 8, yeh baby, lets use power of CompletableFeature.
 
 ### pubnub-jtools-pusher state
 Version 1.0.0 is released. This release  contains only features which used and extremely tested by The [Ringcentral](http://www.ringcentral.com/) company. 
