@@ -29,21 +29,22 @@ In additionally to scalable architecture pubnub-jtools-pusher provides:
 In opposite, Pubnub JTools provides true NIO implemented across [Apache Async Http Client](https://hc.apache.org/httpcomponents-asyncclient-dev/).
 * You free to configure way to send HTTP requests:
   * It is possible to configure synchronous sending via implementation of [Transport](https://github.com/vladimir-bukhtoyarov/pubnub-jtools/blob/master/pusher/src/main/java/com/github/pubnubjtools/pusher/transport/Transport.java) interface. 
-  * It is possible to configure synchronous sending via implementation of [AsyncTransport](https://github.com/vladimir-bukhtoyarov/pubnub-jtools/blob/master/pusher/src/main/java/com/github/pubnubjtools/pusher/transport/AsyncTransport.java) interface.
+  * It is possible to configure asynchronous sending via implementation of [AsyncTransport](https://github.com/vladimir-bukhtoyarov/pubnub-jtools/blob/master/pusher/src/main/java/com/github/pubnubjtools/pusher/transport/AsyncTransport.java) interface.
 * Java 8, yeh baby, lets use CompletableFeature instead of fucking callbacks.
 
 ### pubnub-jtools-pusher state
-Is not released yet, but you can build it from source. At the moment three operation of pubnub-jtools-pusher tested by The [Ringcentral](http://www.ringcentral.com/) company:
-* Sending unencrypted message.
-* Sending encrypted messages.
-* Binding/unbinding device token(registrationId) to Pubnub channel
-
-Feel free to contribute to pubnub-jtools-pusher if you miss some options. It would be easy, because library is designed with [Open/Closed principle](https://en.wikipedia.org/wiki/Open/closed_principle).
+Version 1.0.0 is released. This release  contains only features which used and extremely tested by The [Ringcentral](http://www.ringcentral.com/) company. 
+At the moment pubnub-jtools-pusher provides three operation:
+1. Sending unencrypted message.
+2. Sending encrypted messages.
+3. Binding/unbinding device token(registrationId) to Pubnub channel for APNS, GCM, MPNS.
+Feel free to use [pubnub-jtools issue tracker](https://github.com/vladimir-bukhtoyarov/pubnub-jtools/issues) to ask for implementation any functionality which currently missed for your needs,
+but remember that implementation any functionality related to reading messages from Pubnub is out of scope of pubnub-jtools-pusher, because this library is addressed strongly for publishing. 
 
 ## pubnub-jtools-benchmark
 Is under development. But several benchmarks already able to be used from source code.
 
 
 ## Licenses
-1. Same amount of code related to cryptography are copied form official Pubnub library as is, so you should read [PUBNUB license](https://github.com/pubnub/java/blob/master/LICENSE) before using.
+1. Same amount of code related to cryptography are copied form official Pubnub library as is, so you should read [PUBNUB license](https://github.com/pubnub/java/blob/master/PUBNUB-LICENSE) before using.
 2. Pubnub-JTools is licensed by [Apache license](http://www.apache.org/licenses/LICENSE-2.0)

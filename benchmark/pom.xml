@@ -4,9 +4,9 @@
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
-        <groupId>com.github.pubnub-jtools</groupId>
+        <groupId>com.ringcentral.pubnub-jtools</groupId>
         <artifactId>pubnub-jtools</artifactId>
-        <version>1.0.0.ALPHA-SNAPSHOT</version>
+        <version>1.0.0</version>
     </parent>
 
     <artifactId>benchmark</artifactId>
@@ -18,7 +18,7 @@
     
     <dependencies>
         <dependency>
-            <groupId>com.github.pubnub-jtools</groupId>
+            <groupId>com.ringcentral.pubnub-jtools</groupId>
             <artifactId>pusher</artifactId>
             <version>${project.version}</version>
         </dependency>

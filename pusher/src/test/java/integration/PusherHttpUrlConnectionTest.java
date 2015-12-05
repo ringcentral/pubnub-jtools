@@ -1,15 +1,15 @@
 package integration;
 
-import com.github.pubnubjtools.pusher.Pusher;
-import com.github.pubnubjtools.pusher.PusherBuilder;
-import com.github.pubnubjtools.pusher.model.*;
-import com.github.pubnubjtools.pusher.model.api.Messages;
-import com.github.pubnubjtools.pusher.transport.urlconnection.HttpURLConnectionTransport;
+import com.ringcentral.pubnubjtools.pusher.Pusher;
+import com.ringcentral.pubnubjtools.pusher.PusherBuilder;
+import com.ringcentral.pubnubjtools.pusher.model.*;
+import com.ringcentral.pubnubjtools.pusher.model.api.Messages;
+import com.ringcentral.pubnubjtools.pusher.transport.urlconnection.HttpURLConnectionTransport;
 import org.junit.Test;
 
 public class PusherHttpUrlConnectionTest {
 
-    Pusher pusher = new PusherBuilder().buildSyncPusher(new HttpURLConnectionTransport(10000, 15000));
+    Pusher pusher = PusherBuilder.forTransport(new HttpURLConnectionTransport(10000, 15000)).build();
     Credentials credentials = TestCredentials.CREDENTIALS;
 
     @Test

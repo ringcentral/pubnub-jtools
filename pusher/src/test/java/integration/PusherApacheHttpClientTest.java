@@ -1,12 +1,10 @@
 package integration;
 
-import com.github.pubnubjtools.pusher.Pusher;
-import com.github.pubnubjtools.pusher.PusherBuilder;
-import com.github.pubnubjtools.pusher.model.*;
-import com.github.pubnubjtools.pusher.model.PubnubException;
-import com.github.pubnubjtools.pusher.model.api.Messages;
-import com.github.pubnubjtools.pusher.transport.httpclient.ApacheHttpClientTransport;
-import org.apache.http.impl.client.HttpClients;
+import com.ringcentral.pubnubjtools.pusher.Pusher;
+import com.ringcentral.pubnubjtools.pusher.PusherBuilder;
+import com.ringcentral.pubnubjtools.pusher.model.*;
+import com.ringcentral.pubnubjtools.pusher.model.api.Messages;
+import com.ringcentral.pubnubjtools.pusher.transport.httpclient.ApacheHttpClientTransport;
 import com.pubnub.api.Pubnub;
 import org.junit.Test;
 
@@ -17,7 +15,7 @@ import static org.junit.Assert.assertEquals;
 
 public class PusherApacheHttpClientTest {
 
-    Pusher pusher = new PusherBuilder().buildSyncPusher(new ApacheHttpClientTransport(HttpClients.createDefault()));
+    Pusher pusher = PusherBuilder.forTransport(new ApacheHttpClientTransport()).build();
     Credentials credentials = TestCredentials.CREDENTIALS;
     EncryptionParameters encryptionParameters = new EncryptionParameters("demo");
 
@@ -47,7 +45,7 @@ public class PusherApacheHttpClientTest {
         final String sendMessage = "Test Message " + Math.random();
         final CountDownLatch latch = new CountDownLatch(2);
 
-        PubnubTest.SubscribeCallback sbCb = new PubnubTest.SubscribeCallback(latch) {
+        TestHelper.SubscribeCallback sbCb = new TestHelper.SubscribeCallback(latch) {
             @Override
             public void connectCallback(String channel, Object something) {
                 Message message = Messages.publish().encrypted(sendMessage, sendMessage, channel, credentials, encryptionParameters);
@@ -62,7 +60,7 @@ public class PusherApacheHttpClientTest {
         };
 
         pubnub_enc.subscribe(channel, sbCb);
-        latch.await(100000, TimeUnit.SECONDS);
+        latch.await(10000, TimeUnit.SECONDS);
 
         assertEquals(sendMessage, sbCb.getResponse());
     }

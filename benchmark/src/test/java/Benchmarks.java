@@ -1,6 +1,6 @@
-import com.github.pubnubjtools.benchmark.Benchmark;
-import com.github.pubnubjtools.benchmark.LoadType;
-import com.github.pubnubjtools.benchmark.TransportMode;
+import com.ringcentral.pubnubjtools.benchmark.Benchmark;
+import com.ringcentral.pubnubjtools.benchmark.LoadType;
+import com.ringcentral.pubnubjtools.benchmark.TransportMode;
 
 import java.time.Duration;
 

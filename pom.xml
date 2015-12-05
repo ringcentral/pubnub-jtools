@@ -3,9 +3,9 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>com.github.pubnub-jtools</groupId>
+    <groupId>com.ringcentral.pubnub-jtools</groupId>
     <artifactId>pubnub-jtools</artifactId>
-    <version>1.0.0.ALPHA-SNAPSHOT</version>
+    <version>1.0.0</version>
 
     <packaging>pom</packaging>
     <name>pubnub-jtools</name>

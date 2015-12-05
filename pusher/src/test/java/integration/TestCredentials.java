@@ -1,6 +1,6 @@
 package integration;
 
-import com.github.pubnubjtools.pusher.model.Credentials;
+import com.ringcentral.pubnubjtools.pusher.model.Credentials;
 
 public class TestCredentials {
 

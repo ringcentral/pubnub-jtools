@@ -1,10 +1,10 @@
 package integration;
 
-import com.github.pubnubjtools.pusher.AsyncPusher;
-import com.github.pubnubjtools.pusher.PusherBuilder;
-import com.github.pubnubjtools.pusher.model.*;
-import com.github.pubnubjtools.pusher.model.api.Messages;
-import com.github.pubnubjtools.pusher.transport.asynchttpclient.AsyncApacheHttpClientTransport;
+import com.ringcentral.pubnubjtools.pusher.AsyncPusher;
+import com.ringcentral.pubnubjtools.pusher.PusherBuilder;
+import com.ringcentral.pubnubjtools.pusher.model.*;
+import com.ringcentral.pubnubjtools.pusher.model.api.Messages;
+import com.ringcentral.pubnubjtools.pusher.transport.asynchttpclient.AsyncApacheHttpClientTransport;
 import com.pubnub.api.Pubnub;
 import org.junit.Test;
 
@@ -16,7 +16,7 @@ import static org.junit.Assert.assertEquals;
 
 public class PusherApacheAsyncHttpClientTest {
 
-    AsyncPusher pusher = new PusherBuilder().buildAsyncPusher(new AsyncApacheHttpClientTransport());
+    AsyncPusher pusher = PusherBuilder.forTransport(new AsyncApacheHttpClientTransport()).build();
     Credentials credentials = TestCredentials.CREDENTIALS;
     EncryptionParameters encryptionParameters = new EncryptionParameters("demo");
 
@@ -46,7 +46,7 @@ public class PusherApacheAsyncHttpClientTest {
         final String sendMessage = "Test Message " + Math.random();
         final CountDownLatch latch = new CountDownLatch(2);
 
-        PubnubTest.SubscribeCallback sbCb = new PubnubTest.SubscribeCallback(latch) {
+        TestHelper.SubscribeCallback sbCb = new TestHelper.SubscribeCallback(latch) {
             @Override
             public void connectCallback(String channel, Object something) {
                 Message message = Messages.publish().encrypted(sendMessage, sendMessage, channel, credentials, encryptionParameters);
@@ -61,7 +61,7 @@ public class PusherApacheAsyncHttpClientTest {
         };
 
         pubnub_enc.subscribe(channel, sbCb);
-        latch.await(100000, TimeUnit.SECONDS);
+        latch.await(10000, TimeUnit.SECONDS);
 
         assertEquals(sendMessage, sbCb.getResponse());
     }

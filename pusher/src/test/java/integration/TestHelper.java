@@ -49,19 +49,6 @@ public class TestHelper {
         }
     }
 
-    static class SubscribeCallback extends SimpleCallback {
-        public SubscribeCallback(CountDownLatch latch) {
-            this.latch = latch;
-        }
-
-        @Override
-        public void connectCallback(String channel, Object message) {
-            if (this.latch != null) {
-                this.latch.countDown();
-            }
-        }
-    }
-
     static class PresenceCallback extends Callback {
 
         private String uuid;
@@ -168,5 +155,76 @@ public class TestHelper {
                 latch.await(10, TimeUnit.SECONDS);
             }
         }
+    }
+
+    public static class SubscribeCallback extends Callback {
+
+        private CountDownLatch latch;
+
+        private Object response;
+
+        public SubscribeCallback(CountDownLatch latch) {
+            this.latch = latch;
+        }
+
+        public SubscribeCallback() {
+
+        }
+
+        public Object getResponse() {
+            return response;
+        }
+
+        @Override
+        public void successCallback(String channel, Object message) {
+            response = message;
+            if (latch != null)
+                latch.countDown();
+        }
+
+        @Override
+        public void errorCallback(String channel, PubnubError error) {
+            response = error;
+            if (latch != null)
+                latch.countDown();
+        }
+    }
+
+    public static class PublishCallback extends Callback {
+
+        private CountDownLatch latch;
+        private int result = 0;
+
+        public int getResult() {
+            return result;
+        }
+
+        public PublishCallback(CountDownLatch latch) {
+            this.latch = latch;
+        }
+
+        public PublishCallback() {
+
+        }
+
+        public void successCallback(String channel, Object message) {
+            JSONArray jsarr;
+            try {
+                jsarr = (JSONArray) message;
+                result = (Integer) jsarr.get(0);
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+            if (latch != null)
+                latch.countDown();
+        }
+
+        public void errorCallback(String channel, PubnubError error) {
+            JSONArray jsarr;
+            result = 0;
+            if (latch != null)
+                latch.countDown();
+        }
+
     }
 }
