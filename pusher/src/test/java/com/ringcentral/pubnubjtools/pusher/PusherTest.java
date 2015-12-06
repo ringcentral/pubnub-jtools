@@ -1,6 +1,7 @@
 package com.ringcentral.pubnubjtools.pusher;
 
 import com.ringcentral.pubnubjtools.pusher.model.*;
+import com.ringcentral.pubnubjtools.pusher.monitoring.Monitoring;
 import com.ringcentral.pubnubjtools.pusher.transport.Transport;
 import org.junit.Before;
 import org.junit.Test;
@@ -23,6 +24,7 @@ public class PusherTest {
     @Mock RequestHelper requestHelper;
     @Mock PubnubConfig config;
     @Mock Transport transport;
+    @Mock Monitoring monitoring;
     @Mock Message message;
 
     Pusher pusher;
@@ -32,7 +34,7 @@ public class PusherTest {
         MockitoAnnotations.initMocks(this);
         when(wallClock.currentTimeMillis()).thenReturn(1000l, 1000l + REQUEST_TIME_MILLIS);
 
-        pusher = new Pusher(transport, config, wallClock, requestHelper);
+        pusher = new Pusher(transport, config, monitoring, wallClock, requestHelper);
     }
 
     @Test

@@ -1,6 +1,7 @@
 package com.ringcentral.pubnubjtools.pusher;
 
 import com.ringcentral.pubnubjtools.legacy.PubnubCrypto;
+import com.ringcentral.pubnubjtools.pusher.monitoring.Monitoring;
 import com.ringcentral.pubnubjtools.pusher.transport.AsyncTransport;
 import com.ringcentral.pubnubjtools.pusher.transport.Transport;
 
@@ -26,6 +27,7 @@ public abstract class PusherBuilder<T, P> {
     }
 
     protected T transport;
+    protected Optional<Monitoring> monitoring = Optional.empty();
     private Optional<String> pubnubHost = Optional.empty();
     private Optional<Boolean> useSsl = Optional.empty();
     private Optional<Map<String, String>> httpHeaders = Optional.empty();
@@ -42,7 +44,8 @@ public abstract class PusherBuilder<T, P> {
             @Override
             public Pusher build() {
                 final PubnubConfig pubnubConfig = getPubnubConfig();
-                return new Pusher(transport, pubnubConfig);
+                Monitoring monitoring = this.monitoring.orElse(Monitoring.DISABLED_MONITORING);
+                return new Pusher(transport, pubnubConfig, monitoring);
             }
         };
     }
@@ -52,9 +55,15 @@ public abstract class PusherBuilder<T, P> {
             @Override
             public AsyncPusher build() {
                 final PubnubConfig pubnubConfig = getPubnubConfig();
-                return new AsyncPusher(transport, pubnubConfig);
+                Monitoring monitoring = this.monitoring.orElse(Monitoring.DISABLED_MONITORING);
+                return new AsyncPusher(transport, pubnubConfig, monitoring);
             }
         };
+    }
+
+    public PusherBuilder withMonitoring(Monitoring monitoring) {
+        this.monitoring = Optional.of(monitoring);
+        return this;
     }
 
     public PusherBuilder withPubnubHost(String pubnubHost) {

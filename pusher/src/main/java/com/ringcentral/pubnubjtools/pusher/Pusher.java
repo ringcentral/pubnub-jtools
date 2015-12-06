@@ -1,6 +1,7 @@
 package com.ringcentral.pubnubjtools.pusher;
 
 import com.ringcentral.pubnubjtools.pusher.model.*;
+import com.ringcentral.pubnubjtools.pusher.monitoring.Monitoring;
 import com.ringcentral.pubnubjtools.pusher.transport.Transport;
 
 import java.io.IOException;
@@ -10,16 +11,18 @@ public class Pusher {
 
     private final Transport transport;
     private final PubnubConfig pubnubConfig;
+    private final Monitoring monitoring;
     private final WallClock wallClock;
     private final RequestHelper requestHelper;
 
-    public Pusher(Transport transport, PubnubConfig pubnubConfig) {
-        this(transport, pubnubConfig, WallClock.INSTANCE, RequestHelper.INSTANCE);
+    public Pusher(Transport transport, PubnubConfig pubnubConfig, Monitoring monitoring) {
+        this(transport, pubnubConfig, monitoring, WallClock.INSTANCE, RequestHelper.INSTANCE);
     }
 
-    Pusher(Transport transport, PubnubConfig pubnubConfig, WallClock wallClock, RequestHelper requestHelper) {
+    Pusher(Transport transport, PubnubConfig pubnubConfig, Monitoring monitoring, WallClock wallClock, RequestHelper requestHelper) {
         this.transport = Objects.requireNonNull(transport);
         this.pubnubConfig = Objects.requireNonNull(pubnubConfig);
+        this.monitoring = Objects.requireNonNull(monitoring);
         this.wallClock = Objects.requireNonNull(wallClock);
         this.requestHelper = Objects.requireNonNull(requestHelper);
     }
@@ -31,6 +34,7 @@ public class Pusher {
         if (result.isFailed()) {
             throw new PubnubException(result);
         }
+        monitoring.registerDeliveryResult(result.isSuccess(), result.getDurationMillis());
         return result;
     }
 

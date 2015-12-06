@@ -30,10 +30,12 @@ In opposite, Pubnub JTools provides true NIO implemented across [Apache Async Ht
 * You free to configure way to send HTTP requests:
   * It is possible to configure synchronous sending via implementation of [Transport](https://github.com/vladimir-bukhtoyarov/pubnub-jtools/blob/master/pusher/src/main/java/com/github/pubnubjtools/pusher/transport/Transport.java) interface. 
   * It is possible to configure asynchronous sending via implementation of [AsyncTransport](https://github.com/vladimir-bukhtoyarov/pubnub-jtools/blob/master/pusher/src/main/java/com/github/pubnubjtools/pusher/transport/AsyncTransport.java) interface.
-* Java 8, yeh baby, lets use power of CompletableFeature.
+* Java 8, yeh baby, lets use power of CompletableFeature together with NIO.
+* Built-in monitoring. This library collects useful statistics about publishing rate, publishing latency(includes percentiles), count of failed publishes. Statistics is optional and turned-off by default.
+library provides statistic capturing implementation based on [Metrics Core](https://dropwizard.github.io/metrics/3.1.0/manual/core/), and you are free to provide uour custom implementation of statistics capturing via providing implementation of interface [Monitoring](https://github.com/vladimir-bukhtoyarov/pubnub-jtools/blob/master/pusher/src/main/java/com/github/pubnubjtools/pusher/monitoring/Monitoring.java)
 
 ### pubnub-jtools-pusher state
-Version 1.0.0 is released. This release  contains only features which used and extremely tested by The [Ringcentral](http://www.ringcentral.com/) company. 
+Version 1.0.0 is released. This release contains only features which used and extremely tested by The [Ringcentral](http://www.ringcentral.com/) company. 
 At the moment pubnub-jtools-pusher provides three operation:
 1. Sending unencrypted message.
 2. Sending encrypted messages.
@@ -42,7 +44,7 @@ Feel free to use [pubnub-jtools issue tracker](https://github.com/vladimir-bukht
 but remember that implementation any functionality related to reading messages from Pubnub is out of scope of pubnub-jtools-pusher, because this library is addressed strongly for publishing. 
 
 ## pubnub-jtools-benchmark
-Is under development. But several benchmarks already able to be used from source code.
+Is under development.
 
 
 ## Licenses

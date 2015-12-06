@@ -1,8 +1,8 @@
 package com.ringcentral.pubnubjtools.pusher;
 
 import com.ringcentral.pubnubjtools.pusher.model.*;
+import com.ringcentral.pubnubjtools.pusher.monitoring.Monitoring;
 import com.ringcentral.pubnubjtools.pusher.transport.AsyncTransport;
-import com.ringcentral.pubnubjtools.pusher.transport.Transport;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
@@ -15,6 +15,7 @@ import java.util.concurrent.ExecutionException;
 import static com.ringcentral.pubnubjtools.pusher.DataProvider.*;
 import static junit.framework.TestCase.assertEquals;
 import static org.junit.Assert.assertSame;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 public class AsyncPusherTest {
@@ -25,6 +26,7 @@ public class AsyncPusherTest {
     @Mock RequestHelper requestHelper;
     @Mock PubnubConfig config;
     @Mock AsyncTransport transport;
+    @Mock Monitoring monitoring;
     @Mock Message message;
 
     AsyncPusher pusher;
@@ -34,7 +36,7 @@ public class AsyncPusherTest {
         MockitoAnnotations.initMocks(this);
         when(wallClock.currentTimeMillis()).thenReturn(1000l, 1000l + REQUEST_TIME_MILLIS);
 
-        pusher = new AsyncPusher(transport, config, wallClock, requestHelper);
+        pusher = new AsyncPusher(transport, config, monitoring, wallClock, requestHelper);
     }
 
     @Test
@@ -77,6 +79,7 @@ public class AsyncPusherTest {
         assertSame(exception, result.getException());
         assertEquals(durationMillis, result.getDurationMillis());
         assertEquals(success, result.isSuccess());
+        verify(monitoring).registerDeliveryResult(success, durationMillis);
     }
 
 }
