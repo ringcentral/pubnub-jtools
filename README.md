@@ -40,6 +40,7 @@ At the moment pubnub-jtools-pusher provides three operation:
 * Sending unencrypted message.
 * Sending encrypted messages.
 * Binding/unbinding device token(registrationId) to Pubnub channel for APNS, GCM, MPNS.
+
 Feel free to use [pubnub-jtools issue tracker](https://github.com/vladimir-bukhtoyarov/pubnub-jtools/issues) to ask for implementation any functionality which currently missed for your needs,
 but remember that implementation any functionality related to reading messages from Pubnub is out of scope of pubnub-jtools-pusher, because this library is addressed strongly for publishing.
  
