@@ -48,7 +48,7 @@ but remember that implementation any functionality related to reading messages f
 #### By direct link
 [Download compiled jar, sources, javadocs](https://github.com/vladimir-bukhtoyarov/pubnub-jtools/releases/tag/1.0.0)
  
-#### You can build Bucket4j from sources
+#### You can build pubnub-jtools-pusher from sources
 ```bash
 git clone https://github.com/vladimir-bukhtoyarov/pubnub-jtools.git
 cd pubnub-jtools/pusher
@@ -66,7 +66,7 @@ The pubnub-jtools-pusher library is distributed through [Bintray](http://bintray
       </repositories>
 ```
  
-Then include Bucket4j as dependency to your `pom.xml`
+Then include pubnub-jtools-pusher as dependency to your `pom.xml`
  
 ```xml
 <dependency>
