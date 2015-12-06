@@ -32,19 +32,55 @@ In opposite, Pubnub JTools provides true NIO implemented across [Apache Async Ht
   * It is possible to configure asynchronous sending via implementation of [AsyncTransport](https://github.com/vladimir-bukhtoyarov/pubnub-jtools/blob/master/pusher/src/main/java/com/github/pubnubjtools/pusher/transport/AsyncTransport.java) interface.
 * Java 8, yeh baby, lets use power of CompletableFeature together with NIO.
 * Built-in monitoring. This library collects useful statistics about publishing rate, publishing latency(includes percentiles), count of failed publishes. Statistics is optional and turned-off by default.
-library provides statistic capturing implementation based on [Metrics Core](https://dropwizard.github.io/metrics/3.1.0/manual/core/), and you are free to provide uour custom implementation of statistics capturing via providing implementation of interface [Monitoring](https://github.com/vladimir-bukhtoyarov/pubnub-jtools/blob/master/pusher/src/main/java/com/github/pubnubjtools/pusher/monitoring/Monitoring.java)
+library provides statistic capturing implementation based on [Metrics Core](https://dropwizard.github.io/metrics/3.1.0/manual/core/), and you are free to provide uour custom implementation of statistics capturing via providing implementation of interface [Monitoring](https://github.com/vladimir-bukhtoyarov/pubnub-jtools/blob/master/pusher/src/main/java/com/ringcentral/pubnubjtools/pusher/monitoring/Monitoring.java)
 
 ### pubnub-jtools-pusher state
 Version 1.0.0 is released. This release contains only features which used and extremely tested by The [Ringcentral](http://www.ringcentral.com/) company. 
 At the moment pubnub-jtools-pusher provides three operation:
-1. Sending unencrypted message.
-2. Sending encrypted messages.
-3. Binding/unbinding device token(registrationId) to Pubnub channel for APNS, GCM, MPNS.
+* Sending unencrypted message.
+* Sending encrypted messages.
+* Binding/unbinding device token(registrationId) to Pubnub channel for APNS, GCM, MPNS.
 Feel free to use [pubnub-jtools issue tracker](https://github.com/vladimir-bukhtoyarov/pubnub-jtools/issues) to ask for implementation any functionality which currently missed for your needs,
-but remember that implementation any functionality related to reading messages from Pubnub is out of scope of pubnub-jtools-pusher, because this library is addressed strongly for publishing. 
+but remember that implementation any functionality related to reading messages from Pubnub is out of scope of pubnub-jtools-pusher, because this library is addressed strongly for publishing.
+ 
+### Get pubnub-jtools-pusher library
+ 
+#### By direct link
+[Download compiled jar, sources, javadocs](https://github.com/vladimir-bukhtoyarov/pubnub-jtools/releases/tag/1.0.0)
+ 
+#### You can build Bucket4j from sources
+```bash
+git clone https://github.com/vladimir-bukhtoyarov/pubnub-jtools.git
+cd pubnub-jtools/pusher
+mvn clean install -DpublisherKey=... -DsubscriberKey=... -DsecretKey=...
+```
+ 
+#### You can add pubnub-jtools-pusher to your project as maven dependency 
+The pubnub-jtools-pusher library is distributed through [Bintray](http://bintray.com/), so you need to add Bintray repository to your `pom.xml`
+```xml
+      <repositories>
+          <repository>
+              <id>jcenter</id>
+              <url>http://jcenter.bintray.com</url>
+          </repository>
+      </repositories>
+```
+ 
+Then include Bucket4j as dependency to your `pom.xml`
+ 
+```xml
+<dependency>
+     <groupId>com.ringcentral.pubnub-jtools</groupId>
+     <artifactId>pusher</artifactId>
+     <version>1.0.0</version>
+</dependency>
+```
+
+#### Get started with pubnub-jtools-pusher
+*TBD*
 
 ## pubnub-jtools-benchmark
-Is under development.
+Is under development and is not ready for production usage
 
 
 ## Licenses
